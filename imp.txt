@@ -1,0 +1,376 @@
+SETTER METHOD:
+dog.java(main class)
+
+package com.example.student.nagapriya;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class dog {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("cow.xml");
+		cat c=(cat) context.getBean("Animals");
+		System.out.println(c.getName()+""+c.getYourName());
+
+	}
+
+}
+
+cat.java:(getter setter)
+
+package com.example.student.nagapriya;
+
+public class cat {
+
+	private String Name;
+	private String YourName;
+	
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
+	}
+	public String getYourName() {
+		return YourName;
+	}
+	public void setYourName(String yourName) {
+		YourName = yourName;
+	}
+	
+	
+}
+
+
+cow.xml:(src/main/java)
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+<bean id="Animals" class="com.example.student.nagapriya.cat">
+<property name="Name" value="priya"></property>
+<property name="YourName" value="leela"></property>
+
+
+</bean>
+
+</beans>
+
+............................................................................................................................
+
+CONSTRUCTOR METHOD:
+
+dog.java(main class)
+
+package com.example.student.nagapriya;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class dog {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("cow.xml");
+		cat c=(cat) context.getBean("Animals");
+
+
+		System.out.print(c.getYourName()+" " +c.getName() );
+
+	}
+
+}
+
+cat.java:(right click ->source->generate constructor source field)
+
+
+package com.example.student.nagapriya;
+
+public class cat {
+
+	private String Name;
+	private String YourName;
+	
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
+	}
+
+
+
+	public cat(String name, String yourName) {
+		
+		Name = name;
+		YourName = yourName;
+	}
+
+
+	public String getYourName() {
+		return YourName;
+	}
+	public void setYourName(String yourName) {
+		YourName = yourName;
+	}
+	
+	
+}
+
+
+cow.xml:
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+<bean id="Animals" class="com.example.student.nagapriya.cat">
+
+             <!--  <property name="Name" value="priya"></property>
+             <property name="YourName" value="leela"></property>-->
+
+<constructor-arg value="priya"></constructor-arg>
+<constructor-arg value="nagu"></constructor-arg>
+
+</bean>
+
+</beans>
+..........................................................................................................................
+
+INTERFACE:
+
+dog.java
+
+package com.example.student.nagapriya;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class dog {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("cow.xml");
+		cat c=(cat) context.getBean("Animals");
+		System.out.print(c.getGu().getA() +" " +c.getGu().getB() );
+		System.out.print(c.getTu().getA()+" " +c.getTu().getB() );
+
+	}
+
+}
+
+cat.java
+
+package com.example.student.nagapriya;
+
+public class cat {
+
+
+	
+	private monkey tu;
+	private monkey gu;
+	
+	public monkey getTu() {
+		return tu;
+	}
+	public void setTu(monkey tu) {
+		this.tu = tu;
+	}
+	public monkey getGu() {
+		return gu;
+	}
+	public void setGu(monkey gu) {
+		this.gu = gu;
+	}
+	
+}
+
+
+cow.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+<bean id="Animals" class="com.example.student.nagapriya.cat">
+           
+
+<property name = "tu" ref="tu1"></property>
+<property name = "gu" ref="tu2"></property>
+
+</bean>
+
+
+<bean id="tu1" class="com.example.student.nagapriya.monkey">
+<property name="A" value="100" ></property>
+<property name="B" value="200" ></property>
+</bean>
+
+
+<bean id="tu2" class="com.example.student.nagapriya.monkey">
+<property name="A" value="300" ></property>
+<property name="B" value="400" ></property>
+</bean>
+
+
+
+</beans>
+
+
+monkey.java
+
+
+package com.example.student.nagapriya;
+
+public class monkey {
+	private int A;
+	private int B;
+	
+	
+	public int getA() {
+		return A;
+	}
+	public void setA(int a) {
+		A = a;
+	}
+	public int getB() {
+		return B;
+	}
+	public void setB(int b) {
+		B = b;
+	}
+	
+
+}
+....................................................................................................................................................................
+AUTOWIRE:
+dog.java
+
+package com.example.student.nagapriya;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class dog {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("cow.xml");
+		cat c=(cat) context.getBean("Animals");
+		System.out.print(c.getGu().getA() +" " +c.getGu().getB() );
+		System.out.print(c.getTu().getA()+" " +c.getTu().getB() );
+
+	}
+
+}
+
+
+cat.java
+
+
+package com.example.student.nagapriya;
+
+public class cat {
+
+	
+	private monkey tu;
+	private monkey gu;
+	
+	public monkey getTu() {
+		return tu;
+	}
+	public void setTu(monkey tu) {
+		this.tu = tu;
+	}
+	public monkey getGu() {
+		return gu;
+	}
+	public void setGu(monkey gu) {
+		this.gu = gu;
+	}
+	
+}
+
+cow.xml
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+
+
+
+<bean id="tu" class="com.example.student.nagapriya.monkey">
+<property name="A" value="100" ></property>
+<property name="B" value="200" ></property>
+</bean>
+
+
+<bean id="gu" class="com.example.student.nagapriya.monkey">
+<property name="A" value="300" ></property>
+<property name="B" value="400" ></property>
+</bean>
+
+
+
+</beans>
+
+
+monkey.java
+
+package com.example.student.nagapriya;
+
+public class monkey {
+	private int A;
+	private int B;
+	
+	
+	public int getA() {
+		return A;
+	}
+	public void setA(int a) {
+		A = a;
+	}
+	public int getB() {
+		return B;
+	}
+	public void setB(int b) {
+		B = b;
+	}
+	
+
+}
+...........................................................................................................................................
+
+
+
+
+
+
+https://shrib.com/#register
+https://shrib.com/#feedback
+https://shrib.com/#reactjs
+https://shrib.com/#reactrouter
+https://shrib.com/#injection
+https://shrib.com/#security
+https://shrib.com/#crud
